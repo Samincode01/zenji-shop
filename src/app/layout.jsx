@@ -1,6 +1,6 @@
 import { Bebas_Neue, DM_Sans } from "next/font/google";
-import Navbar from "@/components/navbar/Navbar";
 import Providers from "@/components/Providers";
+import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
 
 const themeInitScript = `
@@ -61,8 +61,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <Providers>
-          <Navbar />
-          {children}
+          <SiteChrome>{children}</SiteChrome>
         </Providers>
       </body>
     </html>

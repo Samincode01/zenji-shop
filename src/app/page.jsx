@@ -1,5 +1,6 @@
 import BrandStatement from "@/components/brand/BrandStatement";
 import FinalCTA from "@/components/brand/FinalCTA";
+import ZenjiWorld from "@/components/brand/ZenjiWorld";
 import Footer from "@/components/Footer";
 import HeroGallery from "@/components/hero/HeroGallery";
 import Marquee from "@/components/Marquee";
@@ -14,6 +15,7 @@ export default function HomePage() {
         <Marquee />
         <ProductSection />
         <ReviewsSection />
+        <ZenjiWorld />
         <BrandStatement />
         <FinalCTA />
       </main>

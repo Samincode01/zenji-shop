@@ -11,6 +11,15 @@ export function formatPrice(amount, currency = "AUD") {
   }).format(amount);
 }
 
+export function formatCurrency(amount, currency = "AUD") {
+  const value = Number(amount);
+  if (!Number.isFinite(value)) {
+    return `$0 ${currency}`;
+  }
+
+  return `${formatPrice(value, currency)} ${currency}`;
+}
+
 export function cartLineId(productId, size) {
   return `${productId}::${size}`;
 }

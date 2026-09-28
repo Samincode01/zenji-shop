@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useId, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 import { easeOut } from "@/lib/motion";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 function categoryLabel(category) {
   if (category === "Tees") return "Tee";
@@ -12,12 +13,8 @@ function categoryLabel(category) {
   return category;
 }
 
-export default function ProductCard({
-  product,
-  index,
-  onAddToBag,
-  className,
-}) {
+export default function ProductCard({ product, index, className }) {
+  const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState(null);
   const [sizeError, setSizeError] = useState("");
   const [added, setAdded] = useState(false);
@@ -27,7 +24,7 @@ export default function ProductCard({
 
   const primaryImage = product.images[0];
   const number = String(index + 1).padStart(2, "0");
-  const priceLabel = `${formatPrice(product.price, product.currency)} AUD`;
+  const priceLabel = formatCurrency(product.price, product.currency);
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
@@ -43,7 +40,7 @@ export default function ProductCard({
     }
 
     setSizeError("");
-    onAddToBag?.(product, selectedSize);
+    addItem(product, selectedSize);
     setAdded(true);
 
     window.setTimeout(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "framer-motion";
 import { sectionReveal } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 

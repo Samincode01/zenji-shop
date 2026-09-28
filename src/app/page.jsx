@@ -1,6 +1,6 @@
 export default function HomePage() {
   return (
-    <main className="flex-1">
+    <main className="flex-1 pt-[var(--nav-height)]">
       <div className="container-zenji flex min-h-[70vh] flex-col justify-center py-24">
         <p className="text-meta mb-4">Foundation / 00</p>
         <h1 className="font-display text-[clamp(3.5rem,12vw,8rem)] text-foreground">
@@ -11,6 +11,8 @@ export default function HomePage() {
           Editorial storefront sections land next.
         </p>
       </div>
+      {/* Temporary height so navbar scroll surface can be verified */}
+      <div className="h-[120vh]" aria-hidden="true" />
     </main>
   );
 }

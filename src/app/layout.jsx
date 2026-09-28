@@ -1,4 +1,5 @@
 import { Bebas_Neue, DM_Sans } from "next/font/google";
+import Navbar from "@/components/navbar/Navbar";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
@@ -59,7 +60,10 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

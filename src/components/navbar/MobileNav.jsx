@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { easeOut } from "@/lib/motion";
+import { lockBodyScroll } from "@/lib/bodyScrollLock";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -21,9 +22,8 @@ export default function MobileNav({ open, onClose, menuButtonRef }) {
   useEffect(() => {
     if (!open) return undefined;
 
-    const previousOverflow = document.body.style.overflow;
+    const unlock = lockBodyScroll();
     const menuButton = menuButtonRef?.current;
-    document.body.style.overflow = "hidden";
 
     const focusTimer = window.setTimeout(() => {
       closeRef.current?.focus();
@@ -58,7 +58,7 @@ export default function MobileNav({ open, onClose, menuButtonRef }) {
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlock();
       window.clearTimeout(focusTimer);
       document.removeEventListener("keydown", onKeyDown);
       menuButton?.focus();

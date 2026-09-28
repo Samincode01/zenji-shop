@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import CartDrawer from "@/components/cart/CartDrawer";
 import DesktopNav from "@/components/navbar/DesktopNav";
 import MobileNav from "@/components/navbar/MobileNav";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
@@ -12,8 +13,10 @@ import { cn } from "@/lib/utils";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const reduceMotion = useReducedMotion();
   const menuButtonRef = useRef(null);
+  const bagButtonRef = useRef(null);
   const { itemCount } = useCart();
 
   useEffect(() => {
@@ -27,7 +30,17 @@ export default function Navbar() {
   }, []);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
-  const toggleMenu = useCallback(() => setMenuOpen((open) => !open), []);
+  const closeCart = useCallback(() => setCartOpen(false), []);
+
+  const openCart = useCallback(() => {
+    setMenuOpen(false);
+    setCartOpen(true);
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setCartOpen(false);
+    setMenuOpen((open) => !open);
+  }, []);
 
   return (
     <>
@@ -62,16 +75,20 @@ export default function Navbar() {
           <div className="flex items-center justify-self-end gap-1 sm:gap-2">
             <ThemeToggle />
 
-            <Link
-              href="/#bag"
+            <button
+              ref={bagButtonRef}
+              type="button"
+              onClick={openCart}
               aria-label={`Bag, ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
+              aria-expanded={cartOpen}
+              aria-controls="cart-drawer"
               className="inline-flex h-11 items-center gap-2 px-2 text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
             >
               <span>Bag</span>
               <span aria-hidden="true" className="text-muted">
                 {itemCount}
               </span>
-            </Link>
+            </button>
 
             <button
               ref={menuButtonRef}
@@ -92,6 +109,12 @@ export default function Navbar() {
         open={menuOpen}
         onClose={closeMenu}
         menuButtonRef={menuButtonRef}
+      />
+
+      <CartDrawer
+        open={cartOpen}
+        onClose={closeCart}
+        triggerRef={bagButtonRef}
       />
     </>
   );

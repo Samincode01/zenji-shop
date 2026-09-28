@@ -3,15 +3,15 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/navbar/Navbar";
 
-const AUTH_ROUTES = new Set(["/login", "/signup"]);
+const FULL_NAV_ROUTES = new Set(["/"]);
 
 export default function SiteChrome({ children }) {
   const pathname = usePathname();
-  const isAuthRoute = AUTH_ROUTES.has(pathname);
+  const showNavbar = FULL_NAV_ROUTES.has(pathname);
 
   return (
     <>
-      {!isAuthRoute ? <Navbar /> : null}
+      {showNavbar ? <Navbar /> : null}
       {children}
     </>
   );

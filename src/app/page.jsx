@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import HeroGallery from "@/components/hero/HeroGallery";
 import Marquee from "@/components/Marquee";
 import ProductSection from "@/components/products/ProductSection";
+import ReviewsSection from "@/components/reviews/ReviewsSection";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
         <HeroGallery />
         <Marquee />
         <ProductSection />
+        <ReviewsSection />
         <BrandStatement />
         <FinalCTA />
       </main>

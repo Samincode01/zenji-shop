@@ -3,10 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import HeroControls from "@/components/hero/HeroControls";
 import { easeOut } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-export default function HeroSlide({ slide, direction, imagePriority = false }) {
+export default function HeroSlide({
+  slide,
+  direction,
+  index,
+  total,
+  onPrev,
+  onNext,
+  imagePriority = false,
+}) {
   const reduceMotion = useReducedMotion();
 
   const transition = {
@@ -21,9 +30,9 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
         exit: { opacity: 0 },
       }
     : {
-        enter: { opacity: 0, y: 20 },
+        enter: { opacity: 0, y: 16 },
         center: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -12 },
+        exit: { opacity: 0, y: -10 },
       };
 
   const imageVariants = reduceMotion
@@ -35,8 +44,8 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
     : {
         enter: {
           opacity: 0,
-          scale: 0.98,
-          x: direction >= 0 ? 20 : -20,
+          scale: 0.985,
+          x: direction >= 0 ? 15 : -15,
         },
         center: {
           opacity: 1,
@@ -45,19 +54,18 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
         },
         exit: {
           opacity: 0,
-          scale: 1.03,
-          x: direction >= 0 ? -20 : 20,
+          scale: 1.025,
+          x: direction >= 0 ? -15 : 15,
         },
       };
 
   return (
     <motion.div
-      className="grid w-full flex-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10"
+      className="grid w-full flex-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-8 xl:gap-10"
       initial="enter"
       animate="center"
       exit="exit"
     >
-      {/* Mobile: eyebrow + title first. Desktop: full copy column. */}
       <div className="relative order-1 flex flex-col justify-center lg:order-none lg:col-span-5 lg:py-6">
         <motion.div
           variants={textVariants}
@@ -69,7 +77,7 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
           <h1
             className={cn(
               "font-display text-foreground",
-              "text-[clamp(3.25rem,14vw,7.5rem)]",
+              "text-[clamp(3.25rem,13vw,7rem)]",
               "whitespace-pre-line",
             )}
           >
@@ -86,18 +94,20 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
               className="group mt-10 inline-flex w-fit items-center gap-3 border-b border-foreground pb-2 text-nav text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--focus-ring)]"
             >
               <span>{slide.cta.label}</span>
-              <span
+              <motion.span
                 aria-hidden="true"
-                className="transition-transform duration-[var(--duration-base)] ease-[var(--ease-out)] group-hover:translate-x-1"
+                className="inline-block"
+                transition={{ duration: 0.25, ease: easeOut }}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
               >
                 →
-              </span>
+              </motion.span>
             </Link>
           </div>
         </motion.div>
       </div>
 
-      <div className="relative order-2 min-h-[24rem] overflow-hidden bg-surface sm:min-h-[30rem] lg:order-none lg:col-span-7 lg:min-h-[min(36rem,calc(100svh-12rem))]">
+      <div className="relative order-2 min-h-[24rem] overflow-hidden bg-surface sm:min-h-[32rem] lg:order-none lg:col-span-7 lg:min-h-[min(38rem,calc(100svh-10rem))]">
         <motion.div
           variants={imageVariants}
           transition={transition}
@@ -109,12 +119,23 @@ export default function HeroSlide({ slide, direction, imagePriority = false }) {
             fill
             priority={imagePriority}
             sizes="(max-width: 1023px) 100vw, 58vw"
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: slide.objectPosition || "center center" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(10,10,10,0.35)_100%)]"
           />
         </motion.div>
+
+        <HeroControls
+          index={index}
+          total={total}
+          onPrev={onPrev}
+          onNext={onNext}
+        />
       </div>
 
-      {/* Mobile-only supporting copy + CTA beneath the image */}
       <motion.div
         variants={textVariants}
         transition={transition}

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import HeroControls from "@/components/hero/HeroControls";
 import HeroSlide from "@/components/hero/HeroSlide";
 import { heroSlides } from "@/data/heroSlides";
 
@@ -101,18 +100,14 @@ export default function HeroGallery() {
               key={slide.id}
               slide={slide}
               direction={direction}
+              index={index}
+              total={total}
+              onPrev={onPrev}
+              onNext={onNext}
               imagePriority={index === 0}
             />
           </AnimatePresence>
         </div>
-
-        <HeroControls
-          index={index}
-          total={total}
-          onPrev={onPrev}
-          onNext={onNext}
-          className="mt-8 lg:mt-10"
-        />
       </div>
     </section>
   );

@@ -18,11 +18,14 @@ export default function ProductCard({ product, index, className }) {
   const [selectedSize, setSelectedSize] = useState(null);
   const [sizeError, setSizeError] = useState("");
   const [added, setAdded] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const reduceMotion = useReducedMotion();
   const errorId = useId();
   const sizeGroupId = useId();
 
   const primaryImage = product.images[0];
+  const secondaryImage = product.images[1];
+  const showSecondary = Boolean(secondaryImage) && hovered && !reduceMotion;
   const number = String(index + 1).padStart(2, "0");
   const priceLabel = formatCurrency(product.price, product.currency);
 
@@ -49,19 +52,29 @@ export default function ProductCard({ product, index, className }) {
   };
 
   return (
-    <article
+    <motion.article
       className={cn("flex flex-col gap-5 sm:gap-6", className)}
       aria-labelledby={`product-${product.id}-name`}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: reduceMotion ? 0.15 : 0.45,
+        delay: reduceMotion ? 0 : index * 0.06,
+        ease: easeOut,
+      }}
     >
-      <div className="group relative aspect-[4/5] overflow-hidden bg-surface">
+      <div
+        className="group relative aspect-[4/5] overflow-hidden bg-surface"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <motion.div
           className="absolute inset-0"
-          whileHover={
+          animate={
             reduceMotion
               ? undefined
-              : {
-                  scale: 1.025,
-                }
+              : { scale: hovered && secondaryImage ? 1.02 : 1 }
           }
           transition={{ duration: 0.55, ease: easeOut }}
         >
@@ -73,6 +86,26 @@ export default function ProductCard({ product, index, className }) {
             className="object-cover object-center"
           />
         </motion.div>
+
+        {secondaryImage ? (
+          <motion.div
+            className="absolute inset-0 hidden md:block"
+            initial={false}
+            animate={{
+              opacity: showSecondary ? 1 : 0,
+            }}
+            transition={{ duration: reduceMotion ? 0 : 0.35, ease: easeOut }}
+            aria-hidden={!showSecondary}
+          >
+            <Image
+              src={secondaryImage.src}
+              alt={secondaryImage.alt}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover object-center"
+            />
+          </motion.div>
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col gap-5">
@@ -147,11 +180,9 @@ export default function ProductCard({ product, index, className }) {
           className="group mt-auto inline-flex w-fit items-center gap-3 border-b border-foreground pb-2 text-nav text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--focus-ring)]"
         >
           <span>{added ? "Added to Bag" : "Add to Bag"}</span>
-          <span aria-hidden="true">
-            {added ? "✓" : "→"}
-          </span>
+          <span aria-hidden="true">{added ? "✓" : "→"}</span>
         </button>
       </div>
-    </article>
+    </motion.article>
   );
 }

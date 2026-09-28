@@ -9,6 +9,7 @@ import MobileNav from "@/components/navbar/MobileNav";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import { useCart } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
+import { AiOutlineShopping } from "react-icons/ai";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -91,10 +92,23 @@ export default function Navbar() {
               aria-controls="cart-drawer"
               className="inline-flex h-11 items-center gap-2 px-2 text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
             >
-              <span>Bag</span>
-              <span aria-hidden="true" className="text-muted">
-                {itemCount}
-              </span>
+              <span
+  className="
+    inline-flex items-center gap-1.5
+    rounded-full
+    border border-current/30
+    px-3 py-1.5
+    cursor-pointer
+    transition-colors duration-200
+    hover:border-current
+    hover:bg-black/5
+    dark:hover:bg-white/10
+  "
+>
+  <AiOutlineShopping className="text-[16px] shrink-0" />
+  <span>Bag</span>
+  <span>{itemCount}</span>
+</span>
             </button>
 
             <button

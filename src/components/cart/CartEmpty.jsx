@@ -1,5 +1,3 @@
-"use client";
-
 export default function CartEmpty({ onContinue }) {
   return (
     <div className="flex flex-1 flex-col justify-center px-6 py-12 sm:px-8">

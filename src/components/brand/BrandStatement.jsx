@@ -68,7 +68,6 @@ export default function BrandStatement() {
               fill
               sizes="100vw"
               className="object-cover object-[68%_center] sm:object-[72%_center] lg:object-[75%_center]"
-              priority={false}
             />
           </motion.div>
         </motion.div>

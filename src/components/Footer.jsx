@@ -47,6 +47,16 @@ export default function Footer() {
               <p className="text-meta mb-4">Connect</p>
               <ul className="flex flex-col gap-1">
                 <li>
+                  <Link href="/login" className={linkClassName}>
+                    Sign In
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/signup" className={linkClassName}>
+                    Sign Up
+                  </Link>
+                </li>
+                <li>
                   <a
                     href="https://instagram.com"
                     target="_blank"

@@ -132,7 +132,24 @@ export default function MobileNav({ open, onClose, menuButtonRef }) {
           </nav>
 
           <div className="px-[clamp(1rem,4vw,3rem)] pb-8">
-            <p className="text-meta">Australia / Editorial demo</p>
+            <p className="text-meta mb-4">Account</p>
+            <div className="flex flex-col gap-1">
+              <Link
+                href="/login"
+                onClick={onClose}
+                className="inline-flex min-h-11 items-center text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                onClick={onClose}
+                className="inline-flex min-h-11 items-center text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
+              >
+                Sign Up
+              </Link>
+            </div>
+            <p className="text-meta mt-8">Australia / Editorial demo</p>
           </div>
         </motion.div>
       ) : null}

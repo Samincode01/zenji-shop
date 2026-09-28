@@ -1,11 +1,28 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import HeroSlide from "@/components/hero/HeroSlide";
 import { heroSlides } from "@/data/heroSlides";
 
 const SWIPE_THRESHOLD = 48;
+
+function isTypingTarget(target) {
+  return (
+    target instanceof HTMLElement &&
+    (target.isContentEditable ||
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.tagName === "SELECT")
+  );
+}
+
+function isModalBlocking() {
+  return Boolean(
+    document.querySelector(
+      '[role="dialog"][aria-modal="true"], .swal2-container',
+    ),
+  );
+}
 
 export default function HeroGallery() {
   const [index, setIndex] = useState(0);
@@ -34,16 +51,7 @@ export default function HeroGallery() {
 
   useEffect(() => {
     const onKeyDown = (event) => {
-      const target = event.target;
-      if (
-        target instanceof HTMLElement &&
-        (target.isContentEditable ||
-          target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.tagName === "SELECT")
-      ) {
-        return;
-      }
+      if (isTypingTarget(event.target) || isModalBlocking()) return;
 
       if (event.key === "ArrowLeft") {
         event.preventDefault();
@@ -95,18 +103,15 @@ export default function HeroGallery() {
           aria-atomic="true"
           className="relative flex flex-1 flex-col"
         >
-          <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <HeroSlide
-              key={slide.id}
-              slide={slide}
-              direction={direction}
-              index={index}
-              total={total}
-              onPrev={onPrev}
-              onNext={onNext}
-              imagePriority={index === 0}
-            />
-          </AnimatePresence>
+          <HeroSlide
+            slide={slide}
+            direction={direction}
+            index={index}
+            total={total}
+            onPrev={onPrev}
+            onNext={onNext}
+            imagePriority={index === 0}
+          />
         </div>
       </div>
     </section>

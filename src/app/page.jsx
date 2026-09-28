@@ -1,5 +1,4 @@
 import BrandStatement from "@/components/brand/BrandStatement";
-import CampaignImage from "@/components/brand/CampaignImage";
 import HeroGallery from "@/components/hero/HeroGallery";
 import Marquee from "@/components/Marquee";
 import ProductSection from "@/components/products/ProductSection";
@@ -11,7 +10,6 @@ export default function HomePage() {
       <Marquee />
       <ProductSection />
       <BrandStatement />
-      <CampaignImage />
     </main>
   );
 }

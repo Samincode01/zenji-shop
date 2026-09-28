@@ -73,6 +73,13 @@ export default function Navbar() {
           <DesktopNav className="justify-self-center" />
 
           <div className="flex items-center justify-self-end gap-1 sm:gap-2">
+            <Link
+              href="/login"
+              className="hidden h-11 items-center px-2 text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)] lg:inline-flex"
+            >
+              Sign In
+            </Link>
+
             <ThemeToggle />
 
             <button
@@ -108,6 +115,7 @@ export default function Navbar() {
       <MobileNav
         open={menuOpen}
         onClose={closeMenu}
+        onOpenCart={openCart}
         menuButtonRef={menuButtonRef}
       />
 

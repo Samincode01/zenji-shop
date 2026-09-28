@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProductCard from "@/components/products/ProductCard";
 import SectionReveal from "@/components/ui/SectionReveal";
 import { products } from "@/data/products";
 
@@ -45,7 +46,7 @@ export default function ProductSection() {
             </p>
 
             <Link
-              href="/#collection"
+              href="/#shop"
               className="group inline-flex w-fit items-center gap-3 border-b border-foreground pb-2 text-nav text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--focus-ring)]"
             >
               <span>View All Pieces</span>
@@ -57,6 +58,19 @@ export default function ProductSection() {
               </span>
             </Link>
           </div>
+        </div>
+
+        <div
+          id="shop"
+          className="mt-16 grid gap-x-8 gap-y-14 sm:mt-20 sm:gap-x-10 sm:gap-y-16 lg:mt-24 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-20"
+        >
+          {products.map((product, index) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </SectionReveal>

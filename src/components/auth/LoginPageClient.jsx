@@ -3,7 +3,7 @@
 import AuthPageShell from "@/components/auth/AuthPageShell";
 
 const LOGIN_IMAGE = {
-  src: "https://images.unsplash.com/photo-1523398002811-cecf3f0b5d9c?auto=format&fit=crop&w=1600&q=80",
+  src: "https://images.unsplash.com/photo-1590330297626-d7aff25a0431?auto=format&fit=crop&w=1600&q=80",
   alt: "Fashion editorial portrait of a model in oversized dark streetwear against concrete architecture",
 };
 

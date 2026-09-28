@@ -5,7 +5,7 @@ export const heroSlides = [
     title: "Wear\nYour\nStory.",
     description: "Anime-inspired streetwear designed in Australia.",
     image:
-      "https://images.unsplash.com/photo-1523398002811-cecf3f0b5d9c?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1590330297626-d7aff25a0431?auto=format&fit=crop&w=1600&q=80",
     alt: "Street fashion portrait of a model in oversized dark streetwear against raw concrete",
     objectPosition: "center 20%",
     cta: { label: "Shop the Drop", href: "/#shop" },

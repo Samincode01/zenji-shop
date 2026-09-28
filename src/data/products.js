@@ -56,7 +56,7 @@ export const products = [
         alt: "Oversized black hoodie presented as a streetwear fashion still life",
       },
       {
-        src: "https://images.unsplash.com/photo-1509942775567-3cf2ac65a5e0?auto=format&fit=crop&w=1200&q=80",
+        src: "https://images.unsplash.com/photo-1710182240446-8ae8c223e135?auto=format&fit=crop&w=1200&q=80",
         alt: "Person wearing a dark oversized hoodie in a muted urban environment",
       },
     ],

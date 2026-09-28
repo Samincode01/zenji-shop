@@ -164,11 +164,11 @@ body {
   background: linear-gradient(
     90deg,
     var(--surface) 0%,
-    var(--surface-elevated) 45%,
-    var(--surface) 90%
+    var(--surface-elevated) 48%,
+    var(--surface) 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.6s var(--ease-in-out) infinite;
+  animation: shimmer 2.2s var(--ease-in-out) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

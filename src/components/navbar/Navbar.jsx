@@ -74,12 +74,7 @@ export default function Navbar() {
           <DesktopNav className="justify-self-center" />
 
           <div className="flex items-center justify-self-end gap-1 sm:gap-2">
-            <Link
-              href="/login"
-              className="hidden h-11 items-center px-2 text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)] lg:inline-flex"
-            >
-              Sign In
-            </Link>
+            
 
             <ThemeToggle />
 
@@ -107,10 +102,15 @@ export default function Navbar() {
 >
   <AiOutlineShopping className="text-[16px] shrink-0" />
   <span>Bag</span>
-  <span>{itemCount}</span>
+  <span className="text-[11px] opacity-60">{itemCount}</span>
 </span>
             </button>
-
+<Link
+              href="/login"
+              className="hidden h-11 items-center px-2 text-nav text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)] lg:inline-flex"
+            >
+              Sign In
+            </Link>
             <button
               ref={menuButtonRef}
               type="button"
